@@ -1,0 +1,155 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://cave.png" type="Texture" id=1]
+[ext_resource path="res://World.gd" type="Script" id=2]
+
+[sub_resource type="TileSet" id=1]
+0/name = "wall"
+0/texture = ExtResource( 1 )
+0/tex_offset = Vector2( 0, 0 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 0, 0, 16, 16 )
+0/tile_mode = 0
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape_one_way = false
+0/shape_one_way_margin = 0.0
+0/shapes = [  ]
+0/z_index = 0
+1/name = "ground"
+1/texture = ExtResource( 1 )
+1/tex_offset = Vector2( 0, 0 )
+1/modulate = Color( 1, 1, 1, 1 )
+1/region = Rect2( 16, 0, 16, 16 )
+1/tile_mode = 0
+1/occluder_offset = Vector2( 0, 0 )
+1/navigation_offset = Vector2( 0, 0 )
+1/shape_offset = Vector2( 0, 0 )
+1/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+1/shape_one_way = false
+1/shape_one_way_margin = 0.0
+1/shapes = [  ]
+1/z_index = 0
+
+[node name="World" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="Progress" type="Label" parent="."]
+margin_left = 16.0
+margin_top = 24.0
+margin_right = 69.0
+margin_bottom = 38.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="."]
+margin_left = 79.0
+margin_top = 24.0
+margin_right = 188.0
+margin_bottom = 44.0
+text = "GENERATE!"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TileMap" type="TileMap" parent="."]
+position = Vector2( 40, 70 )
+tile_set = SubResource( 1 )
+cell_size = Vector2( 16, 16 )
+format = 1
+
+[node name="death_limit" type="HSlider" parent="."]
+margin_left = 304.0
+margin_top = 8.0
+margin_right = 406.0
+margin_bottom = 24.0
+min_value = 1.0
+max_value = 8.0
+value = 3.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="death_limit_label" type="Label" parent="."]
+margin_left = 208.0
+margin_top = 8.0
+margin_right = 297.0
+margin_bottom = 28.0
+text = "death_limit: 3"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="born_limit" type="HSlider" parent="."]
+margin_left = 504.0
+margin_top = 8.0
+margin_right = 613.0
+margin_bottom = 24.0
+min_value = 1.0
+max_value = 8.0
+value = 4.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="born_limit_label" type="Label" parent="."]
+margin_left = 416.0
+margin_top = 8.0
+margin_right = 497.0
+margin_bottom = 22.0
+text = "born_limit: 2"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="initial_probability" type="HSlider" parent="."]
+margin_left = 632.0
+margin_top = 40.0
+margin_right = 1008.0
+margin_bottom = 56.0
+min_value = 0.01
+max_value = 1.0
+step = 0.01
+value = 0.45
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="initial_probability_label" type="Label" parent="."]
+margin_left = 480.0
+margin_top = 40.0
+margin_right = 626.0
+margin_bottom = 54.0
+text = "initial_probability: 0.45"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="iterations" type="HSlider" parent="."]
+margin_left = 304.0
+margin_top = 40.0
+margin_right = 464.0
+margin_bottom = 56.0
+min_value = 1.0
+value = 20.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="iterations_label" type="Label" parent="."]
+margin_left = 209.0
+margin_top = 42.0
+margin_right = 294.0
+margin_bottom = 56.0
+text = "iterations: 20"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]
+[connection signal="value_changed" from="death_limit" to="." method="_on_death_limit_value_changed"]
+[connection signal="value_changed" from="born_limit" to="." method="_on_born_limit_value_changed"]
+[connection signal="value_changed" from="initial_probability" to="." method="_on_initial_probability_value_changed"]
+[connection signal="value_changed" from="iterations" to="." method="_on_iterations_value_changed"]
