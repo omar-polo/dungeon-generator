@@ -13,6 +13,9 @@ onready var _tilemap : TileMap = $TileMap
 onready var _label   : Label   = $Progress
 
 
+var _running := false
+
+
 func _ready() -> void:
 	pass
 
@@ -23,8 +26,11 @@ func _process(delta: float) -> void:
 
 
 func _on_Button_pressed() -> void:
-	_tilemap.clear()
-	_generate_map()
+	if not _running:
+		_running = true
+		_tilemap.clear()
+		yield(_generate_map(), "completed")
+		_running = false
 
 
 func _new_map() -> Array:
